@@ -1,5 +1,7 @@
 package guru.springframework.controllers.domain;
 
+import guru.springframework.controllers.domain.enums.Difficulty;
+
 import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
@@ -16,6 +18,17 @@ public class Recipe {
     private String source;
     private String url;
     private String directons;
+
+    public Difficulty getLevel() {
+        return level;
+    }
+
+    public void setLevel(Difficulty level) {
+        this.level = level;
+    }
+
+    private Difficulty level;
+
     @Lob
     private Byte[] image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
