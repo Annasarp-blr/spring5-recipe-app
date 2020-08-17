@@ -1,8 +1,10 @@
 package guru.springframework.controllers.domain;
 
 import javax.persistence.*;
+import java.util.Set;
+import java.util.HashSet;
 
-public class Reciepe {
+public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
@@ -14,8 +16,12 @@ public class Reciepe {
     private String source;
     private String url;
     private String directons;
+    @Lob
     private Byte[] image;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients = new HashSet<>();
+
+
     private Notes notes;
 
     public String getDescription() {

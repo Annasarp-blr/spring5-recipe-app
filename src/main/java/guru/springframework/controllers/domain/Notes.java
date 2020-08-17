@@ -9,13 +9,12 @@ public class Notes {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     Long id;
 
-
-
     @OneToOne
-    private  Reciepe reciepe;
+    private  Recipe reciepe;
 
     @Lob
     private String notes;
+
     public Long getId() {
         return id;
     }
@@ -24,11 +23,11 @@ public class Notes {
         this.id = id;
     }
 
-    public Reciepe getReciepe() {
+    public Recipe getRecipe() {
         return reciepe;
     }
 
-    public void setReciepe(Reciepe reciepe) {
+    public void setRecipe(Recipe reciepe) {
         this.reciepe = reciepe;
     }
 
