@@ -18,6 +18,8 @@ public class Recipe {
     private String source;
     private String url;
     private String directons;
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty level;
 
     public Difficulty getLevel() {
         return level;
@@ -27,7 +29,7 @@ public class Recipe {
         this.level = level;
     }
 
-    private Difficulty level;
+
 
     @Lob
     private Byte[] image;
