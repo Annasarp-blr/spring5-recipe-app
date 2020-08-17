@@ -1,5 +1,6 @@
 package guru.springframework.controllers.domain;
 
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ public class Ingredient {
     private BigDecimal amount;
     @ManyToOne
     private Recipe recipe;
-    @OneToOne
+    @OneToOne (fetch = FetchType.EAGER)
     private UnitOfMeasure uom;
 
     public String getDescription() {
