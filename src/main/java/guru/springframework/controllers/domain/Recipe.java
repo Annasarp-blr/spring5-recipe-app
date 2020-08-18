@@ -20,24 +20,19 @@ public class Recipe {
     private String directons;
     @Enumerated(value = EnumType.STRING)
     private Difficulty level;
-
-    public Difficulty getLevel() {
-        return level;
-    }
-
-    public void setLevel(Difficulty level) {
-        this.level = level;
-    }
-
-
-
     @Lob
     private Byte[] image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
 
-
+    @OneToOne(cascade =  CascadeType.ALL)
     private Notes notes;
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+            joinColumns =  @JoinColumn(name="recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Categories categories;
+
 
     public String getDescription() {
         return description;
@@ -110,4 +105,12 @@ public class Recipe {
     public void setNotes(Notes notes) {
         this.notes = notes;
     }
+    public Difficulty getLevel() {
+        return level;
+    }
+
+    public void setLevel(Difficulty level) {
+        this.level = level;
+    }
+
 }
