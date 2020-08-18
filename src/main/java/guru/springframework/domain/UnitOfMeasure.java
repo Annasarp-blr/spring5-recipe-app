@@ -13,6 +13,8 @@ public class UnitOfMeasure {
 
     private String uom;
 
+
+
     public Long getID() {
         return ID;
     }
@@ -28,4 +30,13 @@ public class UnitOfMeasure {
     public void setUom(String uom) {
         this.uom = uom;
     }
+
+    @Override
+    public String toString() {
+        return "UnitOfMeasure{" +
+                "ID=" + ID +
+                ", uom='" + uom + '\'' +
+                '}';
+    }
+
 }

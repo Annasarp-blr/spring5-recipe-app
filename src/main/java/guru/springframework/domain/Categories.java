@@ -30,6 +30,8 @@ public class Categories {
         this.id = id;
     }
 
+
+
     public String getDescription() {
         return description;
     }
@@ -38,5 +40,12 @@ public class Categories {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Categories{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
 
 }

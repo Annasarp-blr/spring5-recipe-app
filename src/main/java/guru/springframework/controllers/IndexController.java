@@ -1,5 +1,7 @@
 package guru.springframework.controllers;
 
+import guru.springframework.repositories.CategoryRepository;
+import guru.springframework.repositories.UnitOfMeasureRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,9 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class IndexController {
+    private final CategoryRepository category;
+    private final UnitOfMeasureRepository uom;
+
+    public IndexController(CategoryRepository category, UnitOfMeasureRepository uom) {
+        this.category = category;
+        this.uom = uom;
+    }
 
     @RequestMapping({"", "/", "/index"})
     public String getIndexPage(){
+        System.out.println(category.findByDescription("American"));
+        System.out.println(uom.getByUom("American"));
         return "index";
     }
 }
