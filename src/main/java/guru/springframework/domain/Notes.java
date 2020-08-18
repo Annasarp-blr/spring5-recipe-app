@@ -1,4 +1,4 @@
-package guru.springframework.controllers.domain;
+package guru.springframework.domain;
 
 import javax.persistence.*;
 
@@ -10,7 +10,7 @@ public class Notes {
     Long id;
 
     @OneToOne
-    private  Recipe reciepe;
+    private  Recipe recipe;
 
     @Lob
     private String notes;
@@ -24,11 +24,11 @@ public class Notes {
     }
 
     public Recipe getRecipe() {
-        return reciepe;
+        return recipe;
     }
 
     public void setRecipe(Recipe reciepe) {
-        this.reciepe = reciepe;
+        this.recipe = reciepe;
     }
 
     public String getNotes() {

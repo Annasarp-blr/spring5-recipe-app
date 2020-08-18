@@ -1,11 +1,12 @@
-package guru.springframework.controllers.domain;
+package guru.springframework.domain;
 
-import guru.springframework.controllers.domain.enums.Difficulty;
+import guru.springframework.domain.enums.Difficulty;
 
 import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
 
+@Entity
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +29,12 @@ public class Recipe {
     @OneToOne(cascade =  CascadeType.ALL)
     private Notes notes;
 
+
+
     @ManyToMany
     @JoinTable(name = "recipe_category",
             joinColumns =  @JoinColumn(name="recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Categories categories;
+    private Set<Categories> categories;
 
 
     public String getDescription() {
@@ -82,13 +85,7 @@ public class Recipe {
         this.url = url;
     }
 
-    public String getDirectons() {
-        return directons;
-    }
 
-    public void setDirectons(String directons) {
-        this.directons = directons;
-    }
 
     public Byte[] getImage() {
         return image;
@@ -112,5 +109,11 @@ public class Recipe {
     public void setLevel(Difficulty level) {
         this.level = level;
     }
+    public Set<Categories> getCategories() {
+        return categories;
+    }
 
+    public void setCategories(Set<Categories> categories) {
+        this.categories = categories;
+    }
 }

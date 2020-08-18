@@ -1,17 +1,25 @@
-package guru.springframework.controllers.domain;
+package guru.springframework.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Categories {
     @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private  Long id;
     private String description;
+
+    public Set<Recipe> getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Set<Recipe> recipe) {
+        this.recipe = recipe;
+    }
+
     @ManyToMany(mappedBy="categories")
-    private Recipe recipe;
+    private Set<Recipe> recipe;
 
 
     public Long getId() {
@@ -30,11 +38,5 @@ public class Categories {
         this.description = description;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
-    }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 }
