@@ -1,11 +1,13 @@
 package guru.springframework.controllers.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Categories {
+    @Id
     private  Long id;
     private String description;
     @ManyToMany(mappedBy="categories")
