@@ -116,4 +116,28 @@ public class Recipe {
     public void setCategories(Set<Categories> categories) {
         this.categories = categories;
     }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public String getDirectons() {
+        return directons;
+    }
+
+    public void setDirectons(String directons) {
+        this.directons = directons;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 }
