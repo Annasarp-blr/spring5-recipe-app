@@ -36,7 +36,7 @@ public class Bootstrap implements CommandLineRunner {
 
         UnitOfMeasure teaSpoonMeasure = unitOfMeasure.getByUom("Teaspoon").get();
         UnitOfMeasure tableSpoonMeasure = unitOfMeasure.getByUom("Tablespoon").get();
-        UnitOfMeasure cupMeasure = unitOfMeasure.getByUom("cup").get();
+        UnitOfMeasure cupMeasure = unitOfMeasure.getByUom("Cup").get();
         Categories category = categories.findByDescription("American").get();
 
 
