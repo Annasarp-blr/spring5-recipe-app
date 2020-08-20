@@ -6,9 +6,6 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class Notes {
 
     @Id

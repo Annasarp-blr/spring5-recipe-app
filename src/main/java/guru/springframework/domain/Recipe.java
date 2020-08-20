@@ -8,9 +8,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

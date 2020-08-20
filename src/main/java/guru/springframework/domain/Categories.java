@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Categories {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
