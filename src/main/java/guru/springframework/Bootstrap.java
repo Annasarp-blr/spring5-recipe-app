@@ -9,6 +9,7 @@ import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.IngredientRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
+@Slf4j
 public class Bootstrap implements CommandLineRunner {
     private final IngredientRepository ingredients;
     private final RecipeRepository recipes;
@@ -34,6 +36,7 @@ public class Bootstrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        log.info("Bootstrap Started");
         UnitOfMeasure teaSpoonMeasure = unitOfMeasure.getByUom("Teaspoon").get();
         UnitOfMeasure tableSpoonMeasure = unitOfMeasure.getByUom("Tablespoon").get();
         UnitOfMeasure cupMeasure = unitOfMeasure.getByUom("Cup").get();
@@ -104,6 +107,7 @@ public class Bootstrap implements CommandLineRunner {
         recipe1.setCookTime(10);
         recipe1.setLevel(Difficulty.EASY);
         recipes.save(recipe1);
+        log.info("Bootstrap Done");
 
 
     }

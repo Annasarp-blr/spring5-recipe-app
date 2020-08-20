@@ -5,9 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
 @Entity
-
+@Getter
+@Setter
+@NoArgsConstructor
 public class Categories {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -16,6 +17,5 @@ public class Categories {
 
     @ManyToMany(mappedBy="categories")
     private Set<Recipe> recipe;
-
 
 }
