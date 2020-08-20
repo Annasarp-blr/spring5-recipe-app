@@ -4,6 +4,7 @@ import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -21,7 +22,7 @@ public class IndexController {
     }
 
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage(){
+    public String getIndexPage(Model mode){
         System.out.println(category.findByDescription("American"));
         System.out.println(uom.getByUom("American"));
         return "index";
