@@ -1,13 +1,22 @@
 package guru.springframework.controllers;
 
+import guru.springframework.domain.Categories;
+import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.springframework.ui.Model;
+
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.eq;
 
 public class IndexControllerTest extends TestCase {
 
@@ -26,11 +35,29 @@ public class IndexControllerTest extends TestCase {
 
     @Test
     public void testIndexPage() {
-        Model model = Mockito.mock(Model.class);
-        String redirect = controller.getIndexPage(model);
+        Model mockedModel = Mockito.mock(Model.class);
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        recipe.setDescription("efgh");
+
+        Categories cat = new Categories();
+        cat.setId(1L);
+        cat.setDescription("American");
+        Optional<Categories> optCategoy = Optional.of(cat);
+
+        Mockito.when(mockedCategoryRepository.findByDescription(eq("American"))).thenReturn(optCategoy);
+        ArgumentCaptor<Optional> categoriesArgumentCaptor = ArgumentCaptor.forClass(Optional.class);
+
+        String redirect = controller.getIndexPage(mockedModel);
         Assert.assertEquals(redirect, "index");
-        Mockito.verify(mockedCategoryRepository, Mockito.times(1)).findByDescription(Mockito.anyString());
-        Mockito.verify(mockedUomRepository, Mockito.times(1)).getByUom(Mockito.anyString());
+        Mockito.verify(mockedCategoryRepository, Mockito.times(1)).
+                findByDescription(eq("American"));
+        Mockito.verify(mockedModel, Mockito.times(1)).addAttribute(eq("recipes"),
+                categoriesArgumentCaptor.capture());
+
+        Categories categories = (Categories)categoriesArgumentCaptor.getValue().get();
+
+        Assert.assertEquals(categories.getId(), cat.getId());
 
 
     }
