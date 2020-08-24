@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@EqualsAndHashCode
 public class Notes {
 
     @Id
@@ -13,6 +14,7 @@ public class Notes {
     Long id;
 
     @OneToOne
+    @EqualsAndHashCode.Exclude
     private  Recipe recipe;
 
     @Lob

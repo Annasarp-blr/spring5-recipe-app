@@ -2,6 +2,8 @@ package guru.springframework.domain;
 
 import guru.springframework.domain.enums.Difficulty;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -25,19 +27,26 @@ public class Recipe {
     private Difficulty level;
     @Lob
     private Byte[] image;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe", fetch = FetchType.LAZY, orphanRemoval = true)
+    @Fetch(FetchMode.SELECT)
+    @EqualsAndHashCode.Exclude
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    @OneToOne(cascade =  CascadeType.ALL)
+    @OneToOne(cascade =  CascadeType.ALL, fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude
     private Notes notes;
 
 
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(name = "recipe_category",
             joinColumns =  @JoinColumn(name="recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+
+    @EqualsAndHashCode.Exclude
     private Set<Categories> categories;
 
+    @Version
+    private int version;
 
 
     public Long getId() {

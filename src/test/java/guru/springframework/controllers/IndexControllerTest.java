@@ -29,7 +29,7 @@ public class IndexControllerTest extends TestCase {
 
         mockedCategoryRepository = Mockito.mock(CategoryRepository.class);
         mockedUomRepository = Mockito.mock(UnitOfMeasureRepository.class);
-        controller = new IndexController(mockedCategoryRepository, mockedUomRepository);
+        //controller = new IndexController(mockedCategoryRepository, mockedUomRepository);
 
     }
 
