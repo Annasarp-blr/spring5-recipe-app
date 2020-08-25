@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Iterator;
 import java.util.Optional;
 
 /**
@@ -56,6 +58,34 @@ public class IngredientServiceImpl implements IngredientService {
         }
 
         return ingredientCommandOptional.get();
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long recipeId, Long ingredientId) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (!recipeOptional.isPresent()) {
+            log.error("recipe id not found. Id: " + recipeId);
+        } else {
+            boolean found = false;
+            Recipe recipe = recipeOptional.get();
+            Iterator<Ingredient> iterator = recipe.getIngredients().iterator();
+            while(iterator.hasNext()) {
+                if(iterator.next().getId().equals(ingredientId)) {
+                    found=true;
+                    iterator.remove();
+
+                }
+            }
+            if (found){
+                recipeRepository.save(recipe);
+                log.debug("Removed the ingredient id:" + ingredientId);
+            } else {
+                log.debug("The the ingredient id:" + ingredientId + " is not not found!!!!");
+            }
+
+        }
     }
 
     @Override
@@ -112,4 +142,6 @@ public class IngredientServiceImpl implements IngredientService {
         }
 
     }
+
+
 }

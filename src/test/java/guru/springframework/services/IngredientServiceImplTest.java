@@ -9,12 +9,15 @@ import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -108,4 +111,39 @@ public class IngredientServiceImplTest {
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 
     }
+
+
+    @Test
+    public void deletebyRecipeAndIngId() throws Exception {
+        //given
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Set<Ingredient> ingredients = new HashSet<Ingredient>();
+        Ingredient ingredient1 = new Ingredient();
+        ingredient1.setId(1L);
+
+        Ingredient ingredient2 = new Ingredient();
+        ingredient2.setId(2L);
+
+        Ingredient ingredient3 = new Ingredient();
+        ingredient3.setId(3L);
+        ingredients.add(ingredient1);
+        ingredients.add(ingredient2);
+        ingredients.add(ingredient3);
+
+        recipe.setIngredients(ingredients);
+
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        //then
+         ingredientService.delete(1L, 3L);
+
+        //when
+        verify(recipeRepository, times(1)).findById(anyLong());
+        Assert.assertEquals(ingredients.size(),2);
+
+    }
+
 }
