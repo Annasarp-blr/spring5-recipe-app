@@ -1,6 +1,8 @@
 package guru.springframework.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,8 +11,9 @@ import java.util.Set;
 /**
  * Created by jt on 6/13/17.
  */
-@Data
 @Entity
+@EqualsAndHashCode
+@Data
 public class Recipe {
 
     @Id
@@ -28,6 +31,8 @@ public class Recipe {
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
@@ -37,12 +42,16 @@ public class Recipe {
     private Difficulty difficulty;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Notes notes;
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
         joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {
